@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="card">
+  <h1>Create new Flight</h1>
+  <form [formGroup]="flightform" (ngSubmit)="submitRegistration()" novalidate>
+    <div *ngIf="validMessage != ''">
+      <h3 class="has-info">{{validMessage}}</h3>
+    </div>
+    <div class="form-group">
+      <label>From</label>
+      <select class="form-control" formControlName="departureFrom" required>
+        <option value="">Departure...</option>
+        <option *ngFor="let c of fromto"
+                [value]="c">
+                {{c}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>To</label>
+      <select class="form-control" formControlName="arrivalTo" required>
+        <option value="">Arrival...</option>
+        <option *ngFor="let c of fromto"
+                [value]="c">
+                {{c}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Departure</label>
+      <input type="datetime-local" class="form-control" formControlName="departure" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Arrival</label>
+      <input type="datetime-local" class="form-control" formControlName="arrival" required/>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" class="form-control" formControlName="price" min="0" required/>
+    </div>
+    <div class="form-group">
+      <label>number of seats</label>
+      <input type="number" class="form-control" formControlName="numberOfSeats" min="0" required/>
+    </div>
+    <button type="submit" class="btn btn-primary" >Submit</button>
+  </form>
+</div>
+</div>

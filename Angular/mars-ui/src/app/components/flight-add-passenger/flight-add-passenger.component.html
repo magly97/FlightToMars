@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="card">
+  <h4>Add passenger to flight</h4>
+  <h4>{{flight.departure}} / {{flight.arrival}}</h4>
+  <h4>{{flight.from}} => {{flight.to}}</h4>
+  <form [formGroup]="flightAddPassengerform" (ngSubmit)="submitAdd()" novalidate>
+    <div *ngIf="validMessage != ''">
+      <h3 class="has-info" style="color:Red">{{validMessage}}</h3>
+    </div>
+    <div class="form-group">
+      <label>Select Passenger:</label>
+      <select class="form-control" formControlName="idPassenger" required>
+        <option value="">Passenger...</option>
+        <option *ngFor="let passenger of passengers"
+                [value]="passenger.id">
+                {{passenger.id}} / {{passenger.first_name}} {{passenger.last_name}}
+        </option>
+      </select>
+      <input type="hidden" formControlName="idFlight">
+    </div>
+  <button type="submit" class="btn btn-primary" >Submit</button>
+  </form>
+</div>
+</div>

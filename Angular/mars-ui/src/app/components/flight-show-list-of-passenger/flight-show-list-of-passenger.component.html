@@ -1,0 +1,29 @@
+<div class="container">
+<div class="card">
+<h3>Passenger List</h3>
+  <h4>Flight {{flight.departureFrom}} => {{flight.arrivalTo}} / {{flight.departure}} </h4>
+
+<table class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Birthday</th>
+                <th>Description</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let passenger of passengers">
+                <td>{{passenger.first_name}}</td>
+                <td>{{passenger.last_name}}</td>
+                <td>{{passenger.birthday}}</td>
+                <td>{{passenger.description}}</td>
+                <td><button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(passenger.id)">Delete</button></td>
+                </tr>
+        </tbody>
+
+  </table>
+
+</div>
+</div>

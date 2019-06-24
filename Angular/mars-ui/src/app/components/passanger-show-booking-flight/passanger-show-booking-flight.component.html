@@ -1,0 +1,27 @@
+<div class="container">
+<div class="card">
+<h1>Flights List</h1>
+<table class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th data-breakpoints="xs">Departure</th>
+                <th data-breakpoints="xs">Arrival</th>
+                <th data-breakpoints="xs">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let flight of flights">
+                <td>{{flight.departureFrom}}</td>
+                <td>{{flight.arrivalTo}}</td>
+                <td>{{flight.departure}}</td>
+                <td>{{flight.arrival}}</td>
+                <td><button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(flight.id)">Delete</button></td>
+                </tr>
+        </tbody>
+
+  </table>
+
+</div>
+</div>

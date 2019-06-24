@@ -1,0 +1,25 @@
+<div class="container">
+<div class="card">
+<h1>Passenger List</h1>
+<table class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th data-breakpoints="xs">Birthday</th>
+                <th data-breakpoints="xs">More</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let passenger of passengers">
+                <td>{{passenger.first_name}}</td>
+                <td>{{passenger.last_name}}</td>
+                <td>{{passenger.birthday}}</td>
+                <td><a [routerLink]="['/passengers/view', passenger.id]">Chcek</a></td>
+                </tr>
+        </tbody>
+
+  </table>
+
+</div>
+</div>

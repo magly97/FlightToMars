@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card">
+  <h1>Edit Passenger</h1>
+  <form [formGroup]="passengerformEdit" (ngSubmit)="submitEdit()" novalidate>
+    <div *ngIf="validMessage != ''">
+      <h3 class="has-info">{{validMessage}}</h3>
+    </div>
+    <div class="form-group">
+      <label>Fist name</label>
+      <input type="text" class="form-control" formControlName="first_name" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Last name</label>
+      <input type="text" class="form-control" formControlName="last_name" required/>
+    </div>
+    <div class="form-group">
+            <label class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gender" value="Male">
+            <span class="form-check-label"> Male </span>
+          </label>
+          <label class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gender" value="Famale">
+            <span class="form-check-label"> Female</span>
+          </label>
+    </div>
+    <div class="form-group">
+      <label>Birthday</label>
+      <input type="date" class="form-control" formControlName="birthday" required/>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="textarea" class="form-control" formControlName="description"/>
+    </div>
+
+    <div class="form-group">
+      <label>Country</label>
+      <select class="form-control" formControlName="country" required>
+        <option value="">Country...</option>
+        <option *ngFor="let c of countries"
+                [value]="c">
+                {{c}}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" >Submit</button>
+  </form>
+</div>
+</div>
