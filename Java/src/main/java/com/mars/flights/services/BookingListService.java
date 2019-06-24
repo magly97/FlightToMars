@@ -9,6 +9,7 @@ import com.mars.flights.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,26 +25,29 @@ public class BookingListService {
 
     public List<Flight> ListByPassengerId(Long id)
     {
-        List<BookingList> listOfBookingFlightByPassenger = bookingListRepository.findByIdPassenger(id);
-        List<Flight> ListOfFlight = new ArrayList<>();
-        Long idFlight;
-
-        for (BookingList lb:listOfBookingFlightByPassenger) {
-            idFlight = lb.getIdFlight();
-            ListOfFlight.add(flightRepository.getOne(idFlight));
+        try {
+            List<BookingList> listOfBookingFlightByPassenger = bookingListRepository.findByIdPassenger(id);
+            List<Flight> listOfFlight = new ArrayList<>();
+            listOfBookingFlightByPassenger.forEach(
+                    bookingList -> listOfFlight.add(flightRepository.getOne(bookingList.getIdFlight())));
+            return listOfFlight;
         }
-        return ListOfFlight;
+        catch(Exception e) {
+            return Collections.emptyList();
+        }
     }
 
     public List<Passenger> ListByFlightId(Long id) {
-        List<BookingList> bookingListsForGivenFlight = bookingListRepository.findByIdFlight(id);
-        List<Passenger> listOfPassenger = new ArrayList<>();
-        Long IdPassenger;
-        for (BookingList lb:bookingListsForGivenFlight) {
-            IdPassenger = lb.getIdPassenger();
-            listOfPassenger.add(passengerRepository.getOne(IdPassenger));
+        try {
+            List<BookingList> bookingListsForGivenFlight = bookingListRepository.findByIdFlight(id);
+            List<Passenger> listOfPassenger = new ArrayList<>();
+            bookingListsForGivenFlight.forEach(
+                    bookingList -> listOfPassenger.add(passengerRepository.getOne(bookingList.getIdPassenger())));
+            return listOfPassenger;
         }
-        return listOfPassenger;
+        catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 
     public void deleteBookingList(Long idFlight, Long idPassenger) {
@@ -61,7 +65,7 @@ public class BookingListService {
         Long idFlight = bookingList.getIdFlight();
         Long idPassenger = bookingList.getIdPassenger();
         Flight existingFlight = flightRepository.getOne(idFlight);
-        Integer passengerHasTicket = bookingListRepository.countAllByIdPassengerAndIdFlight(idPassenger,idFlight);
+        Integer passengerHasTicket = bookingListRepository.countAllByIdPassengerAndIdFlight(idPassenger, idFlight);
 
         if(existingFlight.getNumberOfPassengers() < existingFlight.getNumberOfSeats() && passengerHasTicket == 0)
         {
