@@ -11,7 +11,7 @@
         <option value="">Flights...</option>
         <option *ngFor="let flight of flights"
                 [value]="flight.id">
-                {{flight.departureFrom}} => {{flight.arrivalTo}} / {{flight.departure}} / {{flight.price}} $
+                {{flight.departureFrom}} => {{flight.arrivalTo}} / {{flight.departure | date: "HH:mm / yyyy-MM-dd"}} / {{flight.price}} $
         </option>
       </select>
     </div>

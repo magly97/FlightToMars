@@ -14,11 +14,11 @@
             </p>
             <hr/>
             <p>Departure:
-              {{flight.departure}}
+              {{flight.departure | date: "HH:mm yyyy-MM-dd"}}
             </p>
             <hr/>
             <p>Arrival:
-              {{flight.arrival}}
+              {{flight.arrival | date: "HH:mm yyyy-MM-dd"}}
             </p>
             <hr/>
             <p>Price:

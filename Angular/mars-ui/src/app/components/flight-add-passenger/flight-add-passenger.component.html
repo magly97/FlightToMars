@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card">
   <h4>Add passenger to flight</h4>
-  <h4>{{flight.departure}} / {{flight.arrival}}</h4>
+  <h4>{{flight.departure | date: "HH:mm yyyy-MM-dd"}} / {{flight.arrival | date:"HH:mm yyyy-MM-dd"}}</h4>
   <h4>{{flight.from}} => {{flight.to}}</h4>
   <form [formGroup]="flightAddPassengerform" (ngSubmit)="submitAdd()" novalidate>
     <div *ngIf="validMessage != ''">

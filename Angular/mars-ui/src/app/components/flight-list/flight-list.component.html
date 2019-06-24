@@ -15,8 +15,8 @@
                 <tr *ngFor="let flight of flights">
                 <td>{{flight.departureFrom}}</td>
                 <td>{{flight.arrivalTo}}</td>
-                <td>{{flight.departure}}</td>
-                <td>{{flight.arrival}}</td>
+                <td>{{flight.departure | date: "HH:mm yyyy-MM-dd"}}</td>
+                <td>{{flight.arrival | date: "HH:mm yyyy-MM-dd"}}</td>
                 <td><a [routerLink]="['/flights/view', flight.id]">Chcek</a></td>
                 </tr>
         </tbody>
