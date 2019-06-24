@@ -1,88 +1,35 @@
 package com.mars.flights.models;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
+
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Flight {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id;
+    @Getter @Setter
     private LocalDateTime departure;
+    @Getter @Setter
     private LocalDateTime arrival;
+    @Getter @Setter
     private Integer price;
+    @Getter @Setter
     private Integer numberOfSeats;
+    @Getter @Setter
     private Integer numberOfPassengers=0;
+    @Getter @Setter
     private String departureFrom;
+    @Getter @Setter
     private String arrivalTo;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDeparture() {
-        return departure;
-    }
-
-    public void setDeparture(LocalDateTime departure) {
-        this.departure = departure;
-    }
-
-    public LocalDateTime getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(LocalDateTime arrival) {
-        this.arrival = arrival;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getNumberOfSeats() {
-        return numberOfSeats;
-    }
-
-    public void setNumberOfSeats(Integer numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
-
-    public Integer getNumberOfPassengers() {
-        return numberOfPassengers;
-    }
-
-    public void setNumberOfPassengers(Integer numberOfPassengers) {
-        this.numberOfPassengers = numberOfPassengers;
-    }
-
-    public String getDepartureFrom() {
-        return departureFrom;
-    }
-
-    public void setDepartureFrom(String departureFrom) {
-        this.departureFrom = departureFrom;
-    }
-
-    public String getArrivalTo() {
-        return arrivalTo;
-    }
-
-    public void setArrivalTo(String arrivalTo) {
-        this.arrivalTo = arrivalTo;
-    }
-
-
 
     public void updateNumberOfPassengersPlus()
     {

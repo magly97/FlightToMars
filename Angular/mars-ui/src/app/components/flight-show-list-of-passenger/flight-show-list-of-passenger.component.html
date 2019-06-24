@@ -15,8 +15,8 @@
         </thead>
         <tbody>
                 <tr *ngFor="let passenger of passengers">
-                <td>{{passenger.first_name}}</td>
-                <td>{{passenger.last_name}}</td>
+                <td>{{passenger.firstName}}</td>
+                <td>{{passenger.lastName}}</td>
                 <td>{{passenger.birthday}}</td>
                 <td>{{passenger.description}}</td>
                 <td><button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(passenger.id)">Delete</button></td>

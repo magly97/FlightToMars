@@ -21,8 +21,8 @@ export class PassengerAddComponent implements OnInit {
   ngOnInit() {
     this.passengerform = new FormGroup(
       {
-        first_name: new FormControl('', Validators.required),
-        last_name: new FormControl('', Validators.required),
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl('', Validators.required),
         gender: new FormControl('', Validators.required),
         birthday: new FormControl('', Validators.required),
         description: new FormControl(),

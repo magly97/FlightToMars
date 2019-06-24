@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card">
-  <h3>Add {{passenger.first_name}} {{passenger.last_name}} to Flight</h3>
+  <h3>Add {{passenger.firstName}} {{passenger.lastName}} to Flight</h3>
   <form [formGroup]="passengerAddFlightrform" (ngSubmit)="submitAdd()" novalidate>
     <div *ngIf="validMessage != ''">
       <h3 class="has-info" style="color:Red">{{validMessage}}</h3>

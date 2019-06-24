@@ -28,8 +28,8 @@ export class PassengerEditComponent implements OnInit {
     this.passengerformEdit = new FormGroup(
       {
         id: new FormControl(),
-        first_name: new FormControl('', Validators.required),
-        last_name: new FormControl('', Validators.required),
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl('', Validators.required),
         gender: new FormControl('', Validators.required),
         birthday: new FormControl('', Validators.required),
         description: new FormControl(),
