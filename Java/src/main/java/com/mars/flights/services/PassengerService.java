@@ -15,14 +15,17 @@ import java.util.List;
 @Service
 public class PassengerService {
 
-    @Autowired
-    private PassengerRepository passengerRepository;
+    private final PassengerRepository passengerRepository;
+    private final BookingListRepository bookingListRepository;
+    private final FlightRepository flightRepository;
 
     @Autowired
-    private BookingListRepository bookingListRepository;
-
-    @Autowired
-    private FlightRepository flightRepository;
+    public PassengerService(PassengerRepository passengerRepository, BookingListRepository bookingListRepository,
+                            FlightRepository flightRepository) {
+        this.passengerRepository = passengerRepository;
+        this.bookingListRepository = bookingListRepository;
+        this.flightRepository = flightRepository;
+    }
 
     public List<Passenger> passengersList() {
         return passengerRepository.findAll();

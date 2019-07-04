@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card">
+  <div class="card" *ngIf="passenger">
   <h3>Add {{passenger.firstName}} {{passenger.lastName}} to Flight</h3>
   <form [formGroup]="passengerAddFlightrform" (ngSubmit)="submitAdd()" novalidate>
     <div *ngIf="validMessage != ''">

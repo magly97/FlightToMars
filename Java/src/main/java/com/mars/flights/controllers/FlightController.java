@@ -12,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1/flights")
 public class FlightController {
 
-    @Autowired
-    private FlightService flightService;
+    private final FlightService flightService;
+
+    public FlightController(FlightService flightService) {
+        this.flightService = flightService;
+    }
 
     @GetMapping
     public List<Flight> flightList() {

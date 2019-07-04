@@ -3,7 +3,7 @@
       <h1>Flight Information:</h1><br/>
 
         <div class="row">
-          <div class="col-sm-8">
+          <div class="col-sm-8" *ngIf="flight">
             <hr/>
             <p>From:
               {{flight.departureFrom}}

@@ -13,31 +13,30 @@ import java.util.List;
 @Service
 public class FlightService {
 
-    @Autowired
-    private FlightRepository flightRepository;
+    private final FlightRepository flightRepository;
+    private final BookingListRepository bookingListRepository;
 
     @Autowired
-    BookingListRepository bookingListRepository;
+    public FlightService(FlightRepository flightRepository, BookingListRepository bookingListRepository) {
+        this.flightRepository = flightRepository;
+        this.bookingListRepository = bookingListRepository;
+    }
 
     public List<Flight> flightList() {
         return flightRepository.findAll();
     }
 
-    public boolean createFlight(Flight flight) {
+    public void createFlight(Flight flight) {
         flightRepository.saveAndFlush(flight);
-        return true;
     }
 
-    public Flight getFlight(Long id)
-    {
+    public Flight getFlight(Long id) {
         return flightRepository.getOne(id);
     }
 
     public void deleteFlight(Long id) {
-        List<BookingList> Booking = bookingListRepository.findByIdFlight(id);
-        for (BookingList bl:Booking) {
-            bookingListRepository.deleteById(bl.getId());
-        }
+        List<BookingList> bookingList = bookingListRepository.findByIdFlight(id);
+        bookingList.forEach(booking -> bookingListRepository.deleteById(booking.getId()));
         flightRepository.deleteById(id);
     }
 

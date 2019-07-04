@@ -1,5 +1,5 @@
 <div class="container">
-<div class="card">
+<div class="card" *ngIf="flight">
 <h3>Passenger List</h3>
   <h4>Flight {{flight.departureFrom}} => {{flight.arrivalTo}} / {{flight.departure  | date: "HH:mm yyyy-MM-dd"}} </h4>
 

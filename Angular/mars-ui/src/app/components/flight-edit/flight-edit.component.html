@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card">
+  <div class="card" *ngIf="flight">
   <h1>Edit Flight</h1>
   <form [formGroup]="flightformEdit" (ngSubmit)="submintEdit()" novalidate>
     <div *ngIf="validMessage != ''">
@@ -40,7 +40,7 @@
     </div>
     <div class="form-group">
       <label>number of seats</label>
-      <input type="number" class="form-control" formControlName="numberOfSeats" min="{{flight.number_of_passengers}}" required/>
+      <input type="number" class="form-control" formControlName="numberOfSeats" min="{{flight.numberOfPassengers}}" required/>
     </div>
     <div class="form-group">
       <input type="hidden" class="form-control" formControlName="id"/>

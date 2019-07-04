@@ -31,14 +31,11 @@ public class Flight {
     @Getter @Setter
     private String arrivalTo;
 
-    public void updateNumberOfPassengersPlus()
-    {
+    public void updateNumberOfPassengersPlus() {
         this.numberOfPassengers += 1;
     }
 
-    public void updateNumberOfPassengersMinus()
-    {
+    public void updateNumberOfPassengersMinus() {
         this.numberOfPassengers -= 1;
     }
-
 }

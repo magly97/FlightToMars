@@ -2,7 +2,7 @@
     <div class="card">
       <h1>Passanger Information:</h1><br/>
         <div class="row">
-          <div class="col-sm-8">
+          <div class="col-sm-8" *ngIf="passenger">
             <hr/>
             <p>Frist Name:
               {{passenger.firstName}}

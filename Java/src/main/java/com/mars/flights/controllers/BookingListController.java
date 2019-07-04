@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/api/v1/booking")
 public class BookingListController {
 
-    @Autowired
-    private BookingListService bookingListService;
+    private final BookingListService bookingListService;
+
+    public BookingListController(BookingListService bookingListService) {
+        this.bookingListService = bookingListService;
+    }
 
     @GetMapping("/passengers/{id}")
     public List<Flight> ListByPassengerId(@PathVariable Long id)

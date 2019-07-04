@@ -2,6 +2,8 @@ package com.mars.flights.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 
@@ -14,9 +16,9 @@ public class BookingList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     private Long id;
-    @Getter
+    @Getter @Setter
     private Long idPassenger;
-    @Getter
+    @Getter @Setter
     private Long idFlight;
 
 }

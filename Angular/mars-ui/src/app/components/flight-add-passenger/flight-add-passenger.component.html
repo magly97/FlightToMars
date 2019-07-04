@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="card">
+  <div class="card" *ngIf="flight">
   <h4>Add passenger to flight</h4>
   <h4>{{flight.departure | date: "HH:mm yyyy-MM-dd"}} / {{flight.arrival | date:"HH:mm yyyy-MM-dd"}}</h4>
-  <h4>{{flight.from}} => {{flight.to}}</h4>
+  <h4>{{flight.departureFrom}} => {{flight.arrivalTo}}</h4>
   <form [formGroup]="flightAddPassengerform" (ngSubmit)="submitAdd()" novalidate>
     <div *ngIf="validMessage != ''">
       <h3 class="has-info" style="color:Red">{{validMessage}}</h3>

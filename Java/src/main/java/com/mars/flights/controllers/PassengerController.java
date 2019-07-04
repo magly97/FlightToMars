@@ -12,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1/passengers")
 public class PassengerController {
 
-    @Autowired
-    private PassengerService passengerService;
+    private final PassengerService passengerService;
+
+    public PassengerController(PassengerService passengerService) {
+        this.passengerService = passengerService;
+    }
 
     @GetMapping
     public List<Passenger> passengersList() {

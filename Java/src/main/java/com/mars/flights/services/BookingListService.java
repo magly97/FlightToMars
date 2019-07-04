@@ -16,12 +16,17 @@ import java.util.List;
 @Service
 public class BookingListService {
 
+    private final BookingListRepository bookingListRepository;
+    private final FlightRepository flightRepository;
+    private final PassengerRepository passengerRepository;
+
     @Autowired
-    private BookingListRepository bookingListRepository;
-    @Autowired
-    private FlightRepository flightRepository;
-    @Autowired
-    private PassengerRepository passengerRepository;
+    public BookingListService(BookingListRepository bookingListRepository, FlightRepository flightRepository,
+                              PassengerRepository passengerRepository) {
+        this.bookingListRepository = bookingListRepository;
+        this.flightRepository = flightRepository;
+        this.passengerRepository = passengerRepository;
+    }
 
     public List<Flight> ListByPassengerId(Long id)
     {
@@ -67,8 +72,7 @@ public class BookingListService {
         Flight existingFlight = flightRepository.getOne(idFlight);
         Integer passengerHasTicket = bookingListRepository.countAllByIdPassengerAndIdFlight(idPassenger, idFlight);
 
-        if(existingFlight.getNumberOfPassengers() < existingFlight.getNumberOfSeats() && passengerHasTicket == 0)
-        {
+        if(existingFlight.getNumberOfPassengers() < existingFlight.getNumberOfSeats() && passengerHasTicket == 0) {
             existingFlight.updateNumberOfPassengersPlus();
             flightRepository.saveAndFlush(existingFlight);
             bookingListRepository.saveAndFlush(bookingList);
