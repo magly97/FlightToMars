@@ -13,9 +13,8 @@ export class BookinglistService {
 
   constructor(private http: HttpClient) { }
 
-  createBooking(booking) {
-    let body = JSON.stringify(booking);
-    return this.http.post('/server/api/v1/booking', body, httpOptions);
+  createBooking(idFlight: number, idPassenger :number) {
+    return this.http.post('/server/api/v1/booking/' + idFlight +'/' + idPassenger,httpOptions);
   }
 
   deleteBooking(idFlight: number, idPassenger :number) {

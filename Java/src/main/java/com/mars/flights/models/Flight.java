@@ -6,10 +6,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","flightSet"})
 public class Flight {
 
     @Id
@@ -31,11 +32,14 @@ public class Flight {
     @Getter @Setter
     private String arrivalTo;
 
-    public void updateNumberOfPassengersPlus() {
-        this.numberOfPassengers += 1;
-    }
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @Getter @Setter
+    @JsonIgnoreProperties("flightSet")
+    private Set<Passenger> passengerSet;
 
-    public void updateNumberOfPassengersMinus() {
+    public void decreaseNumberOfPassengers() {
         this.numberOfPassengers -= 1;
     }
+
+
 }

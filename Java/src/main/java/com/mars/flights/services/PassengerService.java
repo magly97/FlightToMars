@@ -1,31 +1,20 @@
 package com.mars.flights.services;
 
-import com.mars.flights.models.BookingList;
 import com.mars.flights.models.Flight;
 import com.mars.flights.models.Passenger;
-import com.mars.flights.repositories.BookingListRepository;
-import com.mars.flights.repositories.FlightRepository;
 import com.mars.flights.repositories.PassengerRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
 public class PassengerService {
 
-    private final PassengerRepository passengerRepository;
-    private final BookingListRepository bookingListRepository;
-    private final FlightRepository flightRepository;
-
     @Autowired
-    public PassengerService(PassengerRepository passengerRepository, BookingListRepository bookingListRepository,
-                            FlightRepository flightRepository) {
-        this.passengerRepository = passengerRepository;
-        this.bookingListRepository = bookingListRepository;
-        this.flightRepository = flightRepository;
-    }
+    private PassengerRepository passengerRepository;
 
     public List<Passenger> passengersList() {
         return passengerRepository.findAll();
@@ -36,14 +25,10 @@ public class PassengerService {
     }
 
     public void deletePassenger(Long id) {
-        List<BookingList> passengerBooking = bookingListRepository.findByIdPassenger(id);
-        Flight existingFlight;
-        for (BookingList bl: passengerBooking) {
-            existingFlight = flightRepository.getOne(bl.getIdFlight());
-            existingFlight.updateNumberOfPassengersMinus();
-            flightRepository.saveAndFlush(existingFlight);
-            bookingListRepository.deleteById(bl.getId());
-        }
+        Passenger passenger = passengerRepository.getOne(id);
+        Set<Flight> flightsSet = passenger.getFlightSet();
+        flightsSet.forEach(Flight::decreaseNumberOfPassengers);
+        flightsSet.forEach(flights -> flights.getPassengerSet().remove(passenger));
         passengerRepository.deleteById(id);
     }
 
@@ -55,5 +40,10 @@ public class PassengerService {
         Passenger existingPassenger = passengerRepository.getOne(id);
         BeanUtils.copyProperties(passenger,existingPassenger);
         return passengerRepository.saveAndFlush(existingPassenger);
+    }
+
+    public Set<Flight> flightsPassenger(Long id){
+        Passenger existingPassenger = passengerRepository.getOne(id);
+        return existingPassenger.getFlightSet();
     }
 }

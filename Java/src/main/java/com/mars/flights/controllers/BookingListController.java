@@ -1,45 +1,43 @@
 package com.mars.flights.controllers;
 
-import com.mars.flights.models.BookingList;
 import com.mars.flights.models.Flight;
 import com.mars.flights.models.Passenger;
-import com.mars.flights.services.BookingListService;
+import com.mars.flights.services.FlightService;
+import com.mars.flights.services.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.Set;
 
 
 @RestController
 @RequestMapping("/api/v1/booking")
 public class BookingListController {
 
-    private final BookingListService bookingListService;
-
-    public BookingListController(BookingListService bookingListService) {
-        this.bookingListService = bookingListService;
-    }
+    @Autowired
+    private FlightService flightService;
+    @Autowired
+    private PassengerService passengerService;
 
     @GetMapping("/passengers/{id}")
-    public List<Flight> ListByPassengerId(@PathVariable Long id)
-    {
-        return bookingListService.ListByPassengerId(id);
+    public Set<Flight> ListByPassengerId(@PathVariable Long id) {
+
+        return passengerService.flightsPassenger(id);
     }
 
     @GetMapping("/flights/{id}")
-    public List<Passenger> ListByFlightId(@PathVariable Long id)
-    {
-        return bookingListService.ListByFlightId(id);
+    public Set<Passenger> ListByFlightId(@PathVariable Long id) {
+        return flightService.passengersFlight(id);
     }
 
-    @DeleteMapping("/del/{idFlight}/{idPassenger}")
-    public void deleteBookingList(@PathVariable Long idFlight, @PathVariable Long idPassenger) {
-        bookingListService.deleteBookingList(idFlight, idPassenger);
+    @DeleteMapping("/del/{flightId}/{passengerId}")
+    public void deleteBookingList(@PathVariable Long flightId, @PathVariable Long passengerId) {
+        flightService.deleteBooking(passengerId, flightId);
     }
 
-    @PostMapping
+    @PostMapping("/{flightId}/{passengerId}")
     @ResponseStatus(HttpStatus.OK)
-    public void createBookingList(@RequestBody BookingList bookingList) {
-        bookingListService.createBookingList(bookingList);
+    public void createBookingList(@PathVariable Long flightId, @PathVariable Long passengerId) {
+        flightService.createBooking(passengerId, flightId);
     }
 }

@@ -26,7 +26,6 @@ export class PassangerAddFlightComponent implements OnInit {
     this.getFlights();
     this.passengerAddFlightrform = new FormGroup(
       {
-        idPassenger: new FormControl(),
         idFlight: new FormControl('', Validators.required)
       }
     );
@@ -51,11 +50,10 @@ export class PassangerAddFlightComponent implements OnInit {
   }
 
 submitAdd(){
-    this.passengerAddFlightrform.patchValue({idPassenger: this.passenger.id})
     if(this.passengerAddFlightrform.valid)
     {
     this.validMessage = "Passenger added to flight";
-     this.bookinglistService.createBooking(this.passengerAddFlightrform.value).subscribe(
+     this.bookinglistService.createBooking(this.passengerAddFlightrform.get("idFlight").value, this.passenger.id).subscribe(
        data => {
          this.passengerAddFlightrform.reset();
          return true

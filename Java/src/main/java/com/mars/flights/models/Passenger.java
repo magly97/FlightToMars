@@ -1,15 +1,16 @@
 package com.mars.flights.models;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "passenger")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Passenger {
 
@@ -29,5 +30,10 @@ public class Passenger {
     private String description;
     @Getter @Setter
     private String country;
+
+    @ManyToMany(mappedBy = "passengerSet", cascade = {CascadeType.MERGE})
+    @Getter @Setter
+    @JsonIgnoreProperties("passengerSet")
+    private Set<Flight> flightSet;
 
 }
