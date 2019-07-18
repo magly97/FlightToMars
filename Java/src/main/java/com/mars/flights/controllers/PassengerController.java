@@ -1,6 +1,7 @@
 package com.mars.flights.controllers;
 
 import com.mars.flights.models.Passenger;
+import com.mars.flights.repositories.PassengerRepository;
 import com.mars.flights.services.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +13,8 @@ import java.util.List;
 @RequestMapping("/api/v1/passengers")
 public class PassengerController {
 
-    private final PassengerService passengerService;
-
-    public PassengerController(PassengerService passengerService) {
-        this.passengerService = passengerService;
-    }
+    @Autowired
+    private PassengerService passengerService;
 
     @GetMapping
     public List<Passenger> passengersList() {
